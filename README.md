@@ -2,14 +2,17 @@
 
 ## 1. RNA-sequencing
 
-The steps involved in the RNA-seq analysis pipleline are as follows:
+The steps involved in the RNA-seq analysis pipleline are given below. The detailed commands used in each step are present in (.....txt)
 
 ### • Generating sequencing quality reports of raw fastq.gz files
-Requirements: 
 
+Requirements: 
 FastQC (https://www.bioinformatics.babraham.ac.uk/projects/fastqc/)
 
+### • Adapter and quality trimming of raw reads
 
+Requirements: 
+Cutadapt (https://cutadapt.readthedocs.io/en/stable/)
 
 ChAMP.R - This file includes ...
 
