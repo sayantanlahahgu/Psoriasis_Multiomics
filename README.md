@@ -14,6 +14,33 @@ FastQC (https://www.bioinformatics.babraham.ac.uk/projects/fastqc/)
 Requirements: 
 Cutadapt (https://cutadapt.readthedocs.io/en/stable/)
 
+### • Generating sequencing quality reports of trimmed fastq.gz files
+
+equirements: 
+FastQC (https://www.bioinformatics.babraham.ac.uk/projects/fastqc/)
+
+### • Indexing the reference genome
+
+Requirements:
+STAR (https://github.com/alexdobin/STAR)
+Refernce genome fasta file (https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_46/GRCh37_mapping/GRCh37.primary_assembly.genome.fa.gz)
+
+### • Alignment of reads to the reference genome
+
+Requirements: 
+STAR (https://github.com/alexdobin/STAR)
+Regerence genome annotation file (https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_46/GRCh37_mapping/gencode.v46lift37.annotation.gtf.gz)
+
+### • Transcript assembly of aligned reads
+
+Requirements:
+StringTie (https://ccb.jhu.edu/software/stringtie/)
+
+### • Generation of raw read counts for all annotated genes
+
+Rquirements:
+Python
+preDE.py (https://ccb.jhu.edu/software/stringtie/dl/prepDE.py)
 ChAMP.R - This file includes ...
 
 edgeR.R - This file includes ...
