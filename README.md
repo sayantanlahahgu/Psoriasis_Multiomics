@@ -4,7 +4,7 @@
 
 The steps involved in the RNA-seq analysis pipleline are as follows:
 
-• Generating sequencing quality reports of raw fastq.gz files
+### • Generating sequencing quality reports of raw fastq.gz files
 
 
 
