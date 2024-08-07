@@ -1,0 +1,11 @@
+#Generating Index:
+STAR --runThreadN 10 --runMode genomeGenerate --genomeDir ../../../sayantan/Psoriasis_miRNA_Set_2/Fastq_Files_RNA_seq/ --genomeFastaFiles ../../../igenomes/Homo_sapiens/UCSC/hg19/Sequence/WholeGenomeFasta/genome.fa --sjdbGTFfile ../../../sayantan/Novoalign/hg19_gencode_v19.gtf
+
+#Alignment with STAR
+STAR --genomeDir ../../../../igenomes/Homo_sapiens/Gencode/hg19/STAR_Index/ --readFilesIn S1_R1_adapter_trimmed_min_len_30.fastq.gz S1_R2_adapter_trimmed_min_len_30.fastq.gz --runThreadN 10 --quantMode GeneCounts --chimSegmentMin 15 --chimJunctionOverhangMin 15 --readFilesCommand zcat --outSAMtype BAM SortedByCoordinate --outSAMstrandField intronMotif --chimOutType Junctions SeparateSAMold --outFileNamePrefix S1
+
+# Transcript assembly
+stringtie -p 3 -e -B -G reference_annotation_file -l S1 --rf -o ../stringtie_only_known_transcripts/S1/S1.transcripts.gtf S1Aligned.sortedByCoord.out.quality.filtered.reads.bam
+
+# Generating raw counnts
+prepDe.py
