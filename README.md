@@ -1,6 +1,7 @@
-## Integrative Analysis of RNA-seq, small RNA-seq and DNA methylation profiling
+# Integrative Analysis of RNA-seq, small RNA-seq and DNA methylation profiling
 
-# Code Details
+## Code Details
+
 ChAMP.R - This file includes ...
 
 edgeR.R - This file includes ...
