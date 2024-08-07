@@ -1,4 +1,4 @@
-# Integrative Analysis of RNA-seq, small RNA-seq and DNA methylation profiling
+# Analysis Pipeline of RNA-sequencing, small RNA-sequencing and Illumina Infinium Human Methylation 450k BeadChip Assay
 
 ## Code Details
 
