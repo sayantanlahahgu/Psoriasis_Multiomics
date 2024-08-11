@@ -1,25 +1,31 @@
-library(ChAMP)
-memory.limit(size=70000)
-setwd("C:/Users/ACER/Desktop/psoriasis_ChAMP_pwd")
-myLoad <- champ.load(directory = getwd(), SampleCutoff=0.11, method="champ", arraytype="450K")  # use method Champ or minfi
-source("champ.PairedDMP.R")
-source("champ.PairedDMR.R")
-myNorm <- champ.norm(beta=myLoad$beta,arraytype="450K",method = "BMIQ",cores=1) 
-myCombat <- champ.runCombat(beta=myNorm,pd=myLoad$pd,batchname=c("Batch_ID"))
-myPair <- champ.PairedDMP(beta = myCombat, pair = myLoad$pd$individual, pheno = myLoad$pd$Sample_Group, adjPVal = 0.05, adjust.method = "BH", compare.group = c("Normal","Disease"), arraytype = "450K")
-write.csv(myPair,"champ_results_MM_negative_common_samples.csv")
+# Install edgeR in R from https://www.bioconductor.org/packages/release/bioc/html/ChAMP.html
 
+if (!require("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
 
-Alternate script:
+BiocManager::install("ChAMP")
+
 library(ChAMP)
-memory.limit(size=70000)
-setwd("C:/Users/ACER/Desktop/psoriasis_ChAMP_pwd")
-source("champ.PairedDMP.R")
-myLoad <- champ.load(directory = getwd(), SampleCutoff=0.11, method="minfi", arraytype="450K")  # use method Champ or minfi
+# Set current working directory to the directory containing the .idat files and the sample sheet
+setwd("Directory_name")
+
+# Pre-filtering of probes
+myLoad <- champ.load(directory = getwd(), SampleCutoff=0.11, method="champ", arraytype="450K")  
+
+# Run QC in GUI
 champ.QC(beta = myLoad$beta)
-myNorm <- champ.norm(beta=myLoad$beta,arraytype="450K",rgSet=myLoad$rgSet,mset=myLoad$mset,method = "BMIQ",cores=3) 
+
+# BMIQ normalization
+myNorm <- champ.norm(beta=myLoad$beta,arraytype="450K",method = "BMIQ",cores=1) 
+
+# Generate SVD plot
+champ.SVD(beta=myNorm,pd=myLoad$pd)
+
+# Batch effect correction using Combat
 myCombat <- champ.runCombat(beta=myNorm,pd=myLoad$pd,batchname=c("Batch_ID"))
-champ.QC(beta = myCombat,resultsDir="./CHAMP_QCimages_common_after_Norm_and_Combat/")
+
+# Differential methylation analysis
 myPair <- champ.PairedDMP(beta = myCombat, pair = myLoad$pd$individual, pheno = myLoad$pd$Sample_Group, adjPVal = 0.05, adjust.method = "BH", compare.group = c("Normal","Disease"), arraytype = "450K")
-write.csv(myCombat,"Beta_values_BMIQ_all_common_samples_using_BatchID.csv")
-write.csv(myPair,"DMP_all_common_samples_BatchID.csv")
+
+# Write output to file
+write.csv(myPair,"ChAMP_output.csv")
