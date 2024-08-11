@@ -1,30 +1,23 @@
-1. FastQC
-/Softwares/FastQC/$./fastqc *.fastq.gz
-#Save fastqc reports
-#Determine the adapter sequence from the adapter menu and from the over-represented sequences menu.
+# Generation of read quality reports using FastQC
+./fastqc <sample>.gz
 
+# Adapter and quality trimming using Cutadapt
+cutadapt -a <adapter sequence> --trim-n -m 16 -q 30,30 -o <sample_trimmed>.fastq.gz <sample>.fastq.gz
 
-2.CUTADAPT
-cutadapt -a AGATCGGAAGAGCACACGTCTGAACTC --trim-n -m 16 -q 30,30 -o output.fastq input.fastq.gz
-# For Nextseq, use --nextseq-trim=30
-# For hard-clipping to specific length, -l (length)
-# -m can also be taken as 18 instead of 16, in case of very good sequence quality 
+# Generation of read quality reports post adapter and quality trimming
+./fastqc <sample_trimmed>.gz
 
+# Creating index of reference genome using NovoAlign
+novoindex <genome>.nix <genome>.fa
 
-3. Re-Run FastQC
-/Softwares/FastQC/$./fastqc *.fastq.gz
+# Aligning reads to refernce genome using NovoAlign
+novoalign -c 4 -d <genome>.nix -f <sample_trimmed>.fastq.gz -l 16 -m -h90 -rA -o SAM> <sample>.sam 2> <sample>_log.txt
 
-4.NOVOALIGN
-novoalign -c 4 -d ../../Novoalign/novoalign_index.nix -f input_file.fastq -l 16 -m -h90 -rA -o SAM> output_file.sam 2> output_file_mapped_hg19_log.txt
+# Map quality filter and conversion of SAM to BAM
+samtools view -S -hbq 1 -F 4 <sample>.sam > <sample>.bam
 
+# Sorting alignments based on chormosomal position
+samtools sort <sample>.bam <sample_sorted>
 
-5. CONVERT SAM TO BAM; SORT BAM #check for version of samtools
-samtools view -S -hbq 1 -F 4 input.sam > output.bam
-samtools sort input.bam output_sorted
-samtools sort input.bam -o output_sorted.bam (in current version)
-# To extract unique alignments, extract all lines from the sam/bam file that does not contain the NH:i: parameter.(use grep -v NH) 
-
-
-6. HTSEQ-COUNT
-htseq-count -f bam -s no -t miRNA -i Name -a 1 -r pos --nonunique=all input_sorted.bam ../../Novoalign/hsa_hg19.gff3 > output_count.txt
-# Change the annotation file depending on the features counted. Also change -t and -i accordingly 
+# Generating read counts of miRNAs
+htseq-count -f bam -s no -t miRNA -i Name -a 1 -r pos --nonunique=all <sample_sorted>.bam hsa_hg19.gff3 > <sample_counts>.txt
