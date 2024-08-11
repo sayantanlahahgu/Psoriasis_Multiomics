@@ -109,6 +109,6 @@ The detailed script for differential expression analysis using 'edgeR' is provid
 
 Requirements: 
 R
-Bioconductor package 'ChAMP' in R
+Bioconductor package 'ChAMP' in R.
 The detailed script for differential expression analysis using 'ChAMP' is provided in the file 'ChAMP.R'
 
