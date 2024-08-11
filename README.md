@@ -54,7 +54,7 @@ R
 Bioconductor package 'edgeR' in R
 The detailed script for differential expression analysis using 'edgeR' is provided in the file 'edgeR.R'
 
-## 1. small RNA-sequencing
+## 2. small RNA-sequencing
 
 The steps involved in the RNA-seq analysis pipleline are given below. The detailed commands used in each step are present in 'small RNA-seq.txt'.
 
@@ -105,7 +105,7 @@ R
 Bioconductor package 'edgeR' in R
 The detailed script for differential expression analysis using 'edgeR' is provided in the file 'edgeR.R'
 
-## Analysis of Illumina Infinium Human Methylation 450k BeadChip assay
+## 3. Analysis of Illumina Infinium Human Methylation 450k BeadChip assay
 
 Requirements: 
 R
