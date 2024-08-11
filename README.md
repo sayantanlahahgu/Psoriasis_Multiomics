@@ -16,7 +16,7 @@ Cutadapt (https://cutadapt.readthedocs.io/en/stable/)
 
 ### • Generating sequencing quality reports of trimmed fastq.gz files
 
-equirements: 
+Requirements: 
 FastQC (https://www.bioinformatics.babraham.ac.uk/projects/fastqc/)
 
 ### • Indexing the reference genome
@@ -39,9 +39,20 @@ StringTie (https://ccb.jhu.edu/software/stringtie/)
 ### • Generation of raw read counts for all annotated genes
 
 Rquirements:
-Python
+Python 2.7 or Python 3.0
 preDE.py (https://ccb.jhu.edu/software/stringtie/dl/prepDE.py)
-ChAMP.R - This file includes ...
+
+### • Differential expression analysis
+
+Requirements: 
+R
+Bioconductor package 'edgeR' in R
+The detailed script for differential expression analysis using 'edgeR' is provided in the file 'edgeR.R'
+
+## 1. RNA-sequencing
+
+
+
 
 edgeR.R - This file includes ...
 
