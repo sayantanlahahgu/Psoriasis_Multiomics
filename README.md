@@ -2,7 +2,7 @@
 
 ## 1. RNA-sequencing
 
-The steps involved in the RNA-seq analysis pipleline are given below. The detailed commands used in each step are present in (.....txt)
+The steps involved in the RNA-seq analysis pipleline are given below. The detailed commands used in each step are present in 'RNA-seq.txt'.
 
 ### • Generating sequencing quality reports of raw fastq.gz files
 
@@ -31,6 +31,11 @@ Requirements:
 STAR (https://github.com/alexdobin/STAR)
 Regerence genome annotation file (https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_46/GRCh37_mapping/gencode.v46lift37.annotation.gtf.gz)
 
+### • Map quality filtering of aligned reads and sorting reads according to chromosomal coordinates
+
+Requirements:
+Samtools (https://www.htslib.org/)
+
 ### • Transcript assembly of aligned reads
 
 Requirements:
@@ -49,13 +54,60 @@ R
 Bioconductor package 'edgeR' in R
 The detailed script for differential expression analysis using 'edgeR' is provided in the file 'edgeR.R'
 
-## 1. RNA-sequencing
+## 1. small RNA-sequencing
 
+The steps involved in the RNA-seq analysis pipleline are given below. The detailed commands used in each step are present in 'small RNA-seq.txt'.
 
+### • Generating sequencing quality reports of raw fastq.gz files
 
+Requirements: 
+FastQC (https://www.bioinformatics.babraham.ac.uk/projects/fastqc/)
 
-edgeR.R - This file includes ...
+### • Adapter and quality trimming of raw reads
 
-RNA-Seq - This file includes ...
+Requirements: 
+Cutadapt (https://cutadapt.readthedocs.io/en/stable/)
 
-small-RNAseq - This file includes ...
+### • Generating sequencing quality reports of trimmed fastq.gz files
+
+Requirements: 
+FastQC (https://www.bioinformatics.babraham.ac.uk/projects/fastqc/)
+
+### • Indexing the reference genome
+
+Requirements:
+NovoAlign (http://www.novocraft.com/documentation/novoalign-2/novoalign-reference-manual/)
+Regerence genome annotation file (https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_46/GRCh37_mapping/gencode.v46lift37.annotation.gtf.gz)
+
+### • Alignment of reads to the reference genome
+
+Requirements: 
+NovoAlign (http://www.novocraft.com/documentation/novoalign-2/novoalign-reference-manual/)
+Regerence genome annotation file (https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_46/GRCh37_mapping/gencode.v46lift37.annotation.gtf.gz)
+
+### • Map quality filtering of aligned reads and sorting reads according to chromosomal coordinates
+
+Requirements:
+Samtools (https://www.htslib.org/)
+
+### • Generating raw read counts of small RNAs (in this case, mature miRNAs)
+
+Requirements:
+htseq-count
+Annotation file for mature miRNAs (https://www.mirbase.org/download/hsa.gff3)
+
+Note: Genome annotation file and genome fasta file should have the same assembly version (GRCh37/GRCh38)
+
+### • Differential expression analysis
+
+Requirements: 
+R
+Bioconductor package 'edgeR' in R
+The detailed script for differential expression analysis using 'edgeR' is provided in the file 'edgeR.R'
+
+## Analysis of Illumina Infinium Human Methylation 450k BeadChip assay
+
+Requirements: 
+R
+Bioconductor package 'ChAMP' in R
+The detailed script for differential expression analysis using 'ChAMP' is provided in the file 'ChAMP.R'
